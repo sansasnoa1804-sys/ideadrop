@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IdeaDrop — Turn your idea into a strategic plan</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">💡</div>
+      <span>Idea<strong>Drop</strong></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-actions">
+      <a href="auth.html" class="btn-ghost">Login</a>
+      <a href="auth.html?mode=signup" class="btn-primary">Get started free</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">✦ AI-powered idea validation</div>
+    <h1 class="hero-title">Turn your idea into a<br/><span class="gradient-text">strategic plan</span> in seconds</h1>
+    <p class="hero-sub">Describe your business idea and get an instant AI-generated strategic brief with market analysis, customer personas, revenue models, and actionable launch steps.</p>
+    <div class="hero-tags">
+      <span>⚡ AI-Powered Analysis</span>
+      <span>🎯 Market Insights</span>
+      <span>🚀 Launch Strategy</span>
+    </div>
+    <div class="social-proof">
+      <div class="avatars">
+        <div class="avatar" style="background:#6C63FF">SL</div>
+        <div class="avatar" style="background:#FF6584">MR</div>
+        <div class="avatar" style="background:#43D9AD">AK</div>
+        <div class="avatar" style="background:#F7B731">JP</div>
+        <div class="avatar" style="background:#FC5C7D">TC</div>
+      </div>
+      <span>Joined by <strong>2,400+</strong> entrepreneurs</span>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p class="testimonial">"I validated my SaaS idea in 2 minutes — saved me weeks of research." — <em>Marc R., founder</em></p>
+
+    <div class="idea-box">
+      <textarea id="ideaInput" placeholder="Describe your business idea in a few sentences..." maxlength="1000"></textarea>
+      <div class="char-count"><span id="charCount">0</span>/1000</div>
+      <button class="btn-analyze" onclick="analyzeIdea()">Analyze my idea →</button>
+      <div class="examples">
+        <span>💡 Try an example:</span>
+        <button class="chip" onclick="fillExample('A subscription box for eco-friendly household products delivered monthly to environmentally conscious consumers')">Eco-friendly subscription box</button>
+        <button class="chip" onclick="fillExample('An AI tutor app that creates personalized study plans for high school students based on their learning style and weak subjects')">AI tutor app</button>
+        <button class="chip" onclick="fillExample('A platform connecting freelance chefs with people who want home-cooked meals delivered in their neighborhood')">Freelance chef platform</button>
+      </div>
+      <p class="limit-note" id="limitNote"></p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="section-label">HOW IT WORKS</div>
+    <h2 class="section-title">Three steps to clarity</h2>
+    <p class="section-sub">From raw idea to actionable strategy — in under 60 seconds.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">✏️</div>
+        <h3>Describe your idea</h3>
+        <p>Write a few sentences about your business concept. No fancy pitch deck needed — just the core idea.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">🤖</div>
+        <h3>AI analyzes it</h3>
+        <p>Our AI scans market data, competitor landscapes, and business models to generate a full strategic brief in seconds.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">🚀</div>
+        <h3>Launch with confidence</h3>
+        <p>Get scores, personas, revenue models, risks and 5 concrete first steps to turn your idea into reality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE OUTPUT -->
+  <section class="section sample-section">
+    <div class="section-label">SAMPLE OUTPUT</div>
+    <h2 class="section-title">See what you'll get</h2>
+    <p class="section-sub">A real example of a generated strategic brief — complete, visual, and actionable.</p>
+    <div class="sample-card">
+      <div class="sample-header">
+        <div class="sample-score">
+          <div class="score-circle">78<span>/100</span></div>
+          <div class="score-badge promising">Promising ✓</div>
+        </div>
+        <div class="sample-info">
+          <div class="sample-label">STRATEGIC BRIEF</div>
+          <h3>Eco-friendly subscription box</h3>
+          <p>A monthly subscription service delivering curated eco-friendly household products, targeting environmentally conscious urban millennials.</p>
+        </div>
+      </div>
+      <div class="sample-bars">
+        <div class="bar-row"><span>Market Potential</span><div class="bar"><div class="bar-fill" style="width:85%;background:#6C63FF"></div></div><span>85/100</span></div>
+        <div class="bar-row"><span>Feasibility</span><div class="bar"><div class="bar-fill" style="width:72%;background:#43D9AD"></div></div><span>72/100</span></div>
+        <div class="bar-row"><span>Originality</span><div class="bar"><div class="bar-fill" style="width:88%;background:#FC5C7D"></div></div><span>88/100</span></div>
+        <div class="bar-row"><span>Profitability</span><div class="bar"><div class="bar-fill" style="width:80%;background:#F7B731"></div></div><span>80/100</span></div>
+      </div>
+      <div class="sample-cols">
+        <div class="sample-col">
+          <h4>👍 Key Strengths</h4>
+          <ol><li>Growing $150B+ sustainable goods market</li><li>High customer lifetime value via subscriptions</li><li>Strong brand storytelling potential</li></ol>
+        </div>
+        <div class="sample-col">
+          <h4>⚠️ Risks</h4>
+          <ol><li>High customer acquisition costs</li><li>Supply chain fragility for niche products</li><li>Price sensitivity during economic downturns</li></ol>
+        </div>
+        <div class="sample-col">
+          <h4>🚀 Launch Steps</h4>
+          <ol><li>Validate with 50 beta subscribers</li><li>Source 3-5 anchor eco brands</li><li>Build Shopify store + subscription flow</li><li>Launch Instagram & TikTok content strategy</li><li>Measure NPS after first 3 deliveries</li></ol>
+        </div>
+      </div>
+      <p class="sample-note">This is a sample — <strong>your real analysis</strong> is personalized to your exact idea</p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-label">FEATURES</div>
+    <h2 class="section-title">Everything you need to validate</h2>
+    <p class="section-sub">A complete strategic brief, not just a SWOT matrix.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Viability Score</h3>
+        <p>An overall score out of 100 with 4 sub-scores: market potential, feasibility, originality, and profitability.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Customer Personas</h3>
+        <p>Two detailed ideal customer profiles with demographics, pain points, and goals.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Revenue Models</h3>
+        <p>AI suggests the best monetization strategy tailored to your idea and target market.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Risk Analysis</h3>
+        <p>Three key risks flagged with context, so you can prepare your mitigation strategy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3>Launch Roadmap</h3>
+        <p>Five concrete, prioritized first steps to get from idea to first paying customer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>PDF Export</h3>
+        <p>Export your full strategic brief as a beautifully formatted PDF to share with co-founders or investors.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="section-label">PRICING</div>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">Start free. Upgrade when you're ready.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price">$0<span>/mo</span></div>
+        <ul class="pricing-features">
+          <li>✓ 2 analyses per month</li>
+          <li>✓ Full strategic brief</li>
+          <li>✓ Viability sub-scores</li>
+          <li>✓ Last 3 analyses history</li>
+          <li class="disabled">✗ PDF export</li>
+          <li class="disabled">✗ Side-by-side comparison</li>
+          <li class="disabled">✗ Priority AI processing</li>
+        </ul>
+        <a href="auth.html?mode=signup" class="btn-outline">Get started free</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">👑 POPULAR</div>
+        <div class="pricing-name">Premium</div>
+        <div class="pricing-price">$9<span>/mo</span></div>
+        <ul class="pricing-features">
+          <li>✓ Unlimited analyses</li>
+          <li>✓ Full strategic brief</li>
+          <li>✓ Viability sub-scores</li>
+          <li>✓ Full history</li>
+          <li>✓ PDF export</li>
+          <li>✓ Side-by-side comparison</li>
+          <li>✓ Priority AI processing</li>
+        </ul>
+        <a href="auth.html?mode=signup" class="btn-primary">Upgrade to Premium</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How accurate is the AI analysis? <span>▾</span></button>
+        <div class="faq-a">Our AI uses Claude, one of the most advanced language models available. It draws on extensive knowledge of markets, business models, and startup patterns to give you highly relevant insights. That said, always validate with real users!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's the difference between Free and Premium? <span>▾</span></button>
+        <div class="faq-a">Free gives you 2 analyses per month with the full strategic brief. Premium unlocks unlimited analyses, PDF export, side-by-side idea comparison, and priority processing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I analyze the same idea multiple times? <span>▾</span></button>
+        <div class="faq-a">Yes! Each analysis is independent, so you can refine your idea description and re-analyze to get updated insights as your concept evolves.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my idea kept private and confidential? <span>▾</span></button>
+        <div class="faq-a">Absolutely. Your ideas are stored securely and never shared with other users. Only you can see your analyses.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I use IdeaDrop for existing businesses or just new ideas? <span>▾</span></button>
+        <div class="faq-a">Both! You can validate a brand new concept or get a fresh strategic perspective on an existing business to identify new growth opportunities.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to validate your idea?</h2>
+    <p>Join 2,400+ entrepreneurs who already use IdeaDrop to launch smarter.</p>
+    <a href="auth.html?mode=signup" class="btn-primary btn-large">Start for free →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="logo-icon">💡</div>
+      <span>Idea<strong>Drop</strong></span>
+    </div>
+    <p>© 2026 IdeaDrop · AI-powered idea validation</p>
+  </footer>
+
+  <!-- UPGRADE MODAL -->
+  <div class="modal-overlay" id="upgradeModal" style="display:none">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-icon">👑</div>
+      <h2>You've used all your free analyses</h2>
+      <p>Upgrade to Premium to get unlimited analyses and unlock all features.</p>
+      <ul class="modal-features">
+        <li>✓ Unlimited analyses</li>
+        <li>✓ PDF export</li>
+        <li>✓ Side-by-side comparison</li>
+        <li>✓ Full history</li>
+        <li>✓ Priority AI processing</li>
+      </ul>
+      <a href="auth.html?mode=signup" class="btn-primary btn-large">Upgrade to Premium — $9/mo</a>
+      <button class="btn-ghost" onclick="closeModal()">Maybe later</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

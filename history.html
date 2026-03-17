@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IdeaDrop — History</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">💡</div>
+      <span>Idea<strong>Drop</strong></span>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="btn-primary">+ New analysis</a>
+      <a href="#" class="btn-ghost" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <div class="history-container">
+    <h1>Your analyses</h1>
+    <p class="history-sub">All your past idea validations in one place.</p>
+    <div id="historyList" class="history-list">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading your history...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/history.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IdeaDrop — Analysis Result</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">💡</div>
+      <span>Idea<strong>Drop</strong></span>
+    </a>
+    <div class="nav-actions">
+      <a href="history.html" class="btn-ghost">📋 History</a>
+      <a href="#" class="btn-ghost" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <div class="analysis-container">
+    <div class="analysis-topbar">
+      <a href="index.html" class="btn-ghost">← New analysis</a>
+      <button class="btn-outline" onclick="shareScore()">🔗 Share score</button>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div id="loadingState" class="loading-state">
+      <div class="spinner"></div>
+      <h2>Analyzing your idea...</h2>
+      <p>Our AI is scanning market data, competitor landscapes, and business models.</p>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultState" style="display:none">
+      <div class="idea-recap" id="ideaRecap"></div>
+
+      <!-- SCORE CARD -->
+      <div class="score-card">
+        <div class="score-left">
+          <svg class="gauge" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="10"/>
+            <circle id="gaugeCircle" cx="60" cy="60" r="50" fill="none" stroke="#43D9AD" stroke-width="10"
+              stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+              transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="gauge-label">
+            <span id="scoreNumber" class="score-big">0</span>
+            <span class="score-slash">/100</span>
+            <span id="scoreLabel" class="score-tag">—</span>
+          </div>
+        </div>
+        <div class="score-right">
+          <h3>Viability Score Breakdown</h3>
+          <div id="subScores"></div>
+        </div>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="cards-grid">
+        <div class="result-card" id="cardTargetMarket">
+          <div class="card-header"><span class="card-icon">🎯</span><h3>Target Market</h3></div>
+          <div class="card-body" id="targetMarketContent"></div>
+        </div>
+        <div class="result-card" id="cardPersonas">
+          <div class="card-header"><span class="card-icon">👤</span><h3>Customer Personas</h3></div>
+          <div class="card-body" id="personasContent"></div>
+        </div>
+        <div class="result-card" id="cardRevenue">
+          <div class="card-header"><span class="card-icon">💰</span><h3>Revenue Model</h3></div>
+          <div class="card-body" id="revenueContent"></div>
+        </div>
+        <div class="result-card" id="cardStrengths">
+          <div class="card-header"><span class="card-icon">👍</span><h3>Key Strengths</h3></div>
+          <div class="card-body" id="strengthsContent"></div>
+        </div>
+        <div class="result-card" id="cardRisks">
+          <div class="card-header"><span class="card-icon">⚠️</span><h3>Risks & Watch-outs</h3></div>
+          <div class="card-body" id="risksContent"></div>
+        </div>
+        <div class="result-card" id="cardCompetitors">
+          <div class="card-header"><span class="card-icon">🏆</span><h3>Potential Competitors</h3></div>
+          <div class="card-body" id="competitorsContent"></div>
+        </div>
+        <div class="result-card full-width" id="cardSteps">
+          <div class="card-header"><span class="card-icon">🗺️</span><h3>5 Steps to Launch</h3></div>
+          <div class="card-body" id="stepsContent"></div>
+        </div>
+      </div>
+
+      <div class="pdf-row">
+        <button class="btn-primary" onclick="exportPDF()">📄 Export as PDF</button>
+        <a href="index.html" class="btn-outline">Analyze another idea →</a>
+      </div>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div id="errorState" style="display:none" class="error-state">
+      <div class="error-icon">😕</div>
+      <h2>Something went wrong</h2>
+      <p id="errorMessage">Please try again.</p>
+      <a href="index.html" class="btn-primary">Try again →</a>
+    </div>
+  </div>
+
+  <script src="js/analysis.js"></script>
+</body>
+</html>
