@@ -47,9 +47,9 @@ async function updateLimitNote() {
   if (!note) return;
   const remaining = await getRemainingAnalyses();
   if (remaining === '∞') {
-    note.textContent = '✓ Premium — unlimited analyses';
+    note.textContent = t('premiumUnlimited');
   } else {
-    note.textContent = `${remaining} free analyse${remaining !== 1 ? 's' : ''} remaining this month`;
+    note.textContent = `${remaining} ${t('analysesRemaining')}`;
   }
 }
 
@@ -60,12 +60,23 @@ async function updateNavbar() {
   const user = await getCurrentUser();
   const navActions = document.querySelector('.nav-actions');
   if (!navActions) return;
+
   if (user) {
     navActions.innerHTML = `
-      <a href="history.html" class="btn-ghost">📋 History</a>
-      <button class="btn-ghost" onclick="logout()">Logout</button>
+      <button class="lang-btn lang-toggle" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn lang-toggle" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+      <a href="history.html" class="btn-ghost" data-i18n="history">📋 History</a>
+      <button class="btn-ghost" onclick="logout()" data-i18n="logout">Logout</button>
     `;
   }
+
+  // Re-apply theme icon and lang buttons after rebuild
+  const theme = localStorage.getItem('ideadrop_theme') || 'light';
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  updateLangButtons();
+  applyTranslations();
 }
 
 // =====================
