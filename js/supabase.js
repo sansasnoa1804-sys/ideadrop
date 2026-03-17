@@ -2,7 +2,7 @@
 // SUPABASE CONFIGURATION
 // =====================
 const SUPABASE_URL = 'https://wbzmaljmzeuxyyczervi.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_0Y2A1E8EzR21iKoDIHQU6A_0LlWFWPCUuzu';
+const SUPABASE_KEY = 'sb_publishable_0Y2A1E0EzR21iKoDIHQU6A_0LlWFalV';
 
 // Load Supabase from CDN
 const { createClient } = supabase;
