@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IdeaDrop — Turn your idea into a strategic plan</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -20,15 +20,10 @@
       <a href="#pricing" data-i18n="pricing">Pricing</a>
     </div>
     <div class="nav-actions">
-      <!-- Static buttons always visible -->
-      <button class="btn-ghost" id="btnEN" onclick="setLang('en')">EN</button>
-      <button class="btn-ghost" id="btnFR" onclick="setLang('fr')">FR</button>
-      <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()">🌙</button>
-      <!-- Auth slot: swapped by JS -->
-      <span id="authSlot">
-        <a href="auth.html" class="btn-ghost" data-i18n="login">Login</a>
-        <a href="auth.html?mode=signup" class="btn-primary" data-i18n="getStarted">Get started free</a>
-      </span>
+      <button class="btn-ghost" id="btnEN">EN</button>
+      <button class="btn-ghost" id="btnFR">FR</button>
+      <button class="btn-ghost" id="themeToggle">🌙</button>
+      <span id="authSlot"></span>
     </div>
   </nav>
 
@@ -58,14 +53,14 @@
     <div class="stars">★★★★★</div>
     <p class="testimonial" data-i18n="testimonial">"I validated my SaaS idea in 2 minutes" — Marc R.</p>
     <div class="idea-box">
-      <textarea id="ideaInput" data-i18n="placeholder" maxlength="1000"></textarea>
+      <textarea id="ideaInput" placeholder="Describe your business idea in a few sentences..." maxlength="1000"></textarea>
       <div class="char-count"><span id="charCount">0</span>/1000</div>
-      <button class="btn-analyze" onclick="analyzeIdea()" data-i18n="analyzeBtn">Analyze my idea →</button>
+      <button class="btn-analyze" id="analyzeBtn">Analyze my idea →</button>
       <div class="examples">
         <span data-i18n="tryExample">💡 Try an example:</span>
-        <button class="chip" onclick="fillExample('A subscription box for eco-friendly household products delivered monthly to environmentally conscious consumers')" data-i18n="example1">Eco-friendly subscription box</button>
-        <button class="chip" onclick="fillExample('An AI tutor app that creates personalized study plans for high school students')" data-i18n="example2">AI tutor app</button>
-        <button class="chip" onclick="fillExample('A platform connecting freelance chefs with people who want home-cooked meals delivered in their neighborhood')" data-i18n="example3">Freelance chef platform</button>
+        <button class="chip" data-example="A subscription box for eco-friendly household products delivered monthly to environmentally conscious consumers" data-i18n="example1">Eco-friendly subscription box</button>
+        <button class="chip" data-example="An AI tutor app that creates personalized study plans for high school students based on their learning style and weak subjects" data-i18n="example2">AI tutor app</button>
+        <button class="chip" data-example="A platform connecting freelance chefs with people who want home-cooked meals delivered in their neighborhood" data-i18n="example3">Freelance chef platform</button>
       </div>
       <p class="limit-note" id="limitNote"></p>
     </div>
@@ -150,11 +145,11 @@
     <div class="section-label" data-i18n="faqLabel">FAQ</div>
     <h2 class="section-title" data-i18n="faqTitle">Common questions</h2>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq1q">How accurate is the AI analysis?</span><span>▾</span></button><div class="faq-a" data-i18n="faq1a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq2q">Free vs Premium?</span><span>▾</span></button><div class="faq-a" data-i18n="faq2a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq3q">Can I analyze the same idea multiple times?</span><span>▾</span></button><div class="faq-a" data-i18n="faq3a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq4q">Is my idea kept private?</span><span>▾</span></button><div class="faq-a" data-i18n="faq4a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq5q">Can I use IdeaDrop for existing businesses?</span><span>▾</span></button><div class="faq-a" data-i18n="faq5a"></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq1q">How accurate is the AI analysis?</span><span>▾</span></button><div class="faq-a" data-i18n="faq1a"></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq2q">Free vs Premium?</span><span>▾</span></button><div class="faq-a" data-i18n="faq2a"></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq3q">Can I analyze the same idea multiple times?</span><span>▾</span></button><div class="faq-a" data-i18n="faq3a"></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq4q">Is my idea kept private?</span><span>▾</span></button><div class="faq-a" data-i18n="faq4a"></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq5q">Can I use IdeaDrop for existing businesses?</span><span>▾</span></button><div class="faq-a" data-i18n="faq5a"></div></div>
     </div>
   </section>
 
@@ -171,19 +166,17 @@
 
   <div class="modal-overlay" id="upgradeModal" style="display:none">
     <div class="modal">
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" id="modalClose">✕</button>
       <div class="modal-icon">👑</div>
       <h2 data-i18n="modalTitle">You've used all your free analyses</h2>
       <p data-i18n="modalSub">Upgrade to Premium to get unlimited analyses.</p>
       <ul class="modal-features"><li>✓ Unlimited analyses</li><li>✓ PDF export</li><li>✓ Side-by-side comparison</li><li>✓ Full history</li></ul>
       <a href="auth.html?mode=signup" class="btn-primary btn-large" data-i18n="upgradeBtn">Upgrade to Premium — $9/mo</a>
-      <button class="btn-ghost" onclick="closeModal()" data-i18n="maybeLater">Maybe later</button>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/i18n.js"></script>
   <script src="js/supabase.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

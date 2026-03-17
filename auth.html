@@ -13,49 +13,53 @@
       <div class="logo-icon">💡</div>
       <span>Idea<strong>Drop</strong></span>
     </a>
+    <div class="nav-actions">
+      <button class="btn-ghost" id="btnEN">EN</button>
+      <button class="btn-ghost" id="btnFR">FR</button>
+      <button class="btn-ghost" id="themeToggle">🌙</button>
+      <span id="authSlot"></span>
+    </div>
   </nav>
 
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-tabs">
-        <button class="auth-tab active" id="loginTab" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab active" id="loginTab" onclick="switchTab('login')" data-i18n="login">Login</button>
         <button class="auth-tab" id="signupTab" onclick="switchTab('signup')">Sign Up</button>
       </div>
 
-      <!-- LOGIN FORM -->
       <div id="loginForm">
-        <h2>Welcome back</h2>
-        <p class="auth-sub">Sign in to your IdeaDrop account</p>
+        <h2 data-i18n="loginTitle">Welcome back</h2>
+        <p class="auth-sub" data-i18n="loginSub">Sign in to your IdeaDrop account</p>
         <div class="form-group">
-          <label>Email</label>
+          <label data-i18n="email">Email</label>
           <input type="email" id="loginEmail" placeholder="you@example.com"/>
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label data-i18n="password">Password</label>
           <input type="password" id="loginPassword" placeholder="••••••••"/>
         </div>
-        <button class="btn-primary btn-full" onclick="login()">Sign in →</button>
-        <p class="auth-switch">No account? <a href="#" onclick="switchTab('signup')">Sign up free</a></p>
+        <button class="btn-primary btn-full" id="loginBtn" data-i18n="signinBtn">Sign in →</button>
+        <p class="auth-switch"><span data-i18n="noAccount">No account?</span> <a href="#" onclick="switchTab('signup')" data-i18n="signUpFree">Sign up free</a></p>
       </div>
 
-      <!-- SIGNUP FORM -->
       <div id="signupForm" style="display:none">
-        <h2>Create your account</h2>
-        <p class="auth-sub">Start validating your ideas for free</p>
+        <h2 data-i18n="signupTitle">Create your account</h2>
+        <p class="auth-sub" data-i18n="signupSub">Start validating your ideas for free</p>
         <div class="form-group">
-          <label>Full name</label>
+          <label data-i18n="fullName">Full name</label>
           <input type="text" id="signupName" placeholder="John Doe"/>
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label data-i18n="email">Email</label>
           <input type="email" id="signupEmail" placeholder="you@example.com"/>
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label data-i18n="password">Password</label>
           <input type="password" id="signupPassword" placeholder="Min. 8 characters"/>
         </div>
-        <button class="btn-primary btn-full" onclick="signup()">Create account →</button>
-        <p class="auth-switch">Already have an account? <a href="#" onclick="switchTab('login')">Sign in</a></p>
+        <button class="btn-primary btn-full" id="signupBtn" data-i18n="createBtn">Create account →</button>
+        <p class="auth-switch"><span data-i18n="alreadyAccount">Already have an account?</span> <a href="#" onclick="switchTab('login')" data-i18n="signIn">Sign in</a></p>
       </div>
 
       <div id="authMessage" class="auth-message"></div>
@@ -63,8 +67,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/i18n.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
