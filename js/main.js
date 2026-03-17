@@ -1,13 +1,4 @@
 // =====================
-// CONFIGURATION
-// ⚠️ Replace with your real Anthropic API key
-// =====================
-const CONFIG = {
-  ANTHROPIC_API_KEY: 'YOUR_ANTHROPIC_API_KEY_HERE',
-  FREE_LIMIT: 2,
-};
-
-// =====================
 // CHAR COUNTER
 // =====================
 const ideaInput = document.getElementById('ideaInput');
@@ -31,45 +22,49 @@ function fillExample(text) {
 // =====================
 // ANALYZE IDEA
 // =====================
-function analyzeIdea() {
+async function analyzeIdea() {
   const idea = ideaInput.value.trim();
   if (!idea || idea.length < 20) {
     alert('Please describe your idea in at least 20 characters.');
     return;
   }
 
-  // Check usage limit
-  const usageCount = parseInt(localStorage.getItem('ideadrop_usage') || '0');
-  const isPremium = localStorage.getItem('ideadrop_premium') === 'true';
-
-  if (!isPremium && usageCount >= CONFIG.FREE_LIMIT) {
+  const ok = await canAnalyze();
+  if (!ok) {
     document.getElementById('upgradeModal').style.display = 'flex';
     return;
   }
 
-  // Save idea and increment counter
   localStorage.setItem('ideadrop_current_idea', idea);
-  if (!isPremium) {
-    localStorage.setItem('ideadrop_usage', usageCount + 1);
-  }
-
-  // Redirect to analysis page
   window.location.href = 'analysis.html';
 }
 
 // =====================
 // UPDATE LIMIT NOTE
 // =====================
-function updateLimitNote() {
+async function updateLimitNote() {
   const note = document.getElementById('limitNote');
   if (!note) return;
-  const usageCount = parseInt(localStorage.getItem('ideadrop_usage') || '0');
-  const isPremium = localStorage.getItem('ideadrop_premium') === 'true';
-  if (isPremium) {
+  const remaining = await getRemainingAnalyses();
+  if (remaining === '∞') {
     note.textContent = '✓ Premium — unlimited analyses';
   } else {
-    const remaining = CONFIG.FREE_LIMIT - usageCount;
-    note.textContent = `${Math.max(0, remaining)} free analyse${remaining !== 1 ? 's' : ''} remaining this month`;
+    note.textContent = `${remaining} free analyse${remaining !== 1 ? 's' : ''} remaining this month`;
+  }
+}
+
+// =====================
+// UPDATE NAVBAR
+// =====================
+async function updateNavbar() {
+  const user = await getCurrentUser();
+  const navActions = document.querySelector('.nav-actions');
+  if (!navActions) return;
+  if (user) {
+    navActions.innerHTML = `
+      <a href="history.html" class="btn-ghost">📋 History</a>
+      <button class="btn-ghost" onclick="logout()">Logout</button>
+    `;
   }
 }
 
@@ -89,15 +84,7 @@ function closeModal() {
 }
 
 // =====================
-// LOGOUT
-// =====================
-function logout() {
-  localStorage.removeItem('ideadrop_user');
-  localStorage.removeItem('ideadrop_premium');
-  window.location.href = 'index.html';
-}
-
-// =====================
 // INIT
 // =====================
+updateNavbar();
 updateLimitNote();

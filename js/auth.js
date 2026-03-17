@@ -1,13 +1,11 @@
-// Simple local auth using localStorage
-// For production, replace with Supabase or Firebase
+// Auth page logic with Supabase
 
 function switchTab(tab) {
   document.getElementById('loginTab').classList.toggle('active', tab === 'login');
   document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
   document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
   document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
-  document.getElementById('authMessage').className = 'auth-message';
-  document.getElementById('authMessage').textContent = '';
+  clearMessage();
 }
 
 function showMessage(text, type) {
@@ -16,7 +14,13 @@ function showMessage(text, type) {
   el.className = `auth-message ${type}`;
 }
 
-function login() {
+function clearMessage() {
+  const el = document.getElementById('authMessage');
+  el.textContent = '';
+  el.className = 'auth-message';
+}
+
+async function login() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
@@ -25,21 +29,24 @@ function login() {
     return;
   }
 
-  // Check stored users
-  const users = JSON.parse(localStorage.getItem('ideadrop_users') || '[]');
-  const user = users.find(u => u.email === email && u.password === password);
+  const btn = document.querySelector('#loginForm .btn-primary');
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
 
-  if (!user) {
-    showMessage('Invalid email or password.', 'error');
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    showMessage(error.message, 'error');
+    btn.textContent = 'Sign in →';
+    btn.disabled = false;
     return;
   }
 
-  localStorage.setItem('ideadrop_user', JSON.stringify(user));
   showMessage('Logged in! Redirecting...', 'success');
-  setTimeout(() => window.location.href = 'index.html', 1000);
+  setTimeout(() => window.location.href = 'index.html', 800);
 }
 
-function signup() {
+async function signup() {
   const name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
   const password = document.getElementById('signupPassword').value;
@@ -53,23 +60,39 @@ function signup() {
     return;
   }
 
-  const users = JSON.parse(localStorage.getItem('ideadrop_users') || '[]');
-  if (users.find(u => u.email === email)) {
-    showMessage('An account with this email already exists.', 'error');
+  const btn = document.querySelector('#signupForm .btn-primary');
+  btn.textContent = 'Creating account...';
+  btn.disabled = true;
+
+  const { data, error } = await sb.auth.signUp({ email, password });
+
+  if (error) {
+    showMessage(error.message, 'error');
+    btn.textContent = 'Create account →';
+    btn.disabled = false;
     return;
   }
 
-  const newUser = { name, email, password, plan: 'free', createdAt: new Date().toISOString() };
-  users.push(newUser);
-  localStorage.setItem('ideadrop_users', JSON.stringify(users));
-  localStorage.setItem('ideadrop_user', JSON.stringify(newUser));
+  if (data.user) {
+    await sb.from('profiles').insert({
+      id: data.user.id,
+      name: name,
+      plan: 'free',
+      analyses_count: 0,
+      analyses_reset_date: new Date().toISOString().split('T')[0]
+    });
+  }
 
-  showMessage('Account created! Redirecting...', 'success');
-  setTimeout(() => window.location.href = 'index.html', 1000);
+  showMessage('Account created! Check your email to confirm, then sign in.', 'success');
+  btn.textContent = 'Create account →';
+  btn.disabled = false;
 }
 
 // Auto-switch tab based on URL param
 const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('mode') === 'signup') {
-  switchTab('signup');
-}
+if (urlParams.get('mode') === 'signup') switchTab('signup');
+
+// Redirect if already logged in
+getCurrentUser().then(user => {
+  if (user) window.location.href = 'index.html';
+});

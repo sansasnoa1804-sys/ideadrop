@@ -227,7 +227,10 @@ function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 // =====================
 // SAVE TO HISTORY
 // =====================
-function saveToHistory(idea, data) {
+async function saveToHistory(idea, data) {
+  const user = await getCurrentUser();
+
+  // Always save to localStorage as backup
   const history = JSON.parse(localStorage.getItem('ideadrop_history') || '[]');
   history.unshift({
     id: Date.now(),
@@ -237,8 +240,21 @@ function saveToHistory(idea, data) {
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
     data: data,
   });
-  // Keep last 20
   localStorage.setItem('ideadrop_history', JSON.stringify(history.slice(0, 20)));
+
+  // Also save to Supabase if logged in
+  if (user) {
+    await sb.from('analyses').insert({
+      user_id: user.id,
+      idea: idea.substring(0, 500),
+      score: data.viabilityScore,
+      score_label: data.scoreLabel,
+      result: data,
+    });
+    await incrementUsage(user.id);
+  } else {
+    await incrementUsage(null);
+  }
 }
 
 // =====================
