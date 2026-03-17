@@ -334,3 +334,13 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTranslations();
   updateLangButtons();
 });
+
+// Override updateLangButtons to use IDs
+function updateLangButtons() {
+  const btnEN = document.getElementById('btnEN');
+  const btnFR = document.getElementById('btnFR');
+  if (btnEN) btnEN.style.color = currentLang === 'en' ? 'var(--primary)' : '';
+  if (btnEN) btnEN.style.fontWeight = currentLang === 'en' ? '700' : '';
+  if (btnFR) btnFR.style.color = currentLang === 'fr' ? 'var(--primary)' : '';
+  if (btnFR) btnFR.style.fontWeight = currentLang === 'fr' ? '700' : '';
+}

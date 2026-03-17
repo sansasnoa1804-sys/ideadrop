@@ -11,6 +11,7 @@ if (ideaInput) {
 }
 
 function fillExample(text) {
+  if (!ideaInput) return;
   ideaInput.value = text;
   charCount.textContent = text.length;
   ideaInput.focus();
@@ -49,35 +50,24 @@ async function updateLimitNote() {
 }
 
 // =====================
-// NAVBAR — built once, always complete
+// NAVBAR — only swap the auth part
 // =====================
 async function buildNavbar() {
-  const navActions = document.getElementById('navActions');
-  if (!navActions) return;
+  const authSlot = document.getElementById('authSlot');
+  if (!authSlot) return;
 
   const user = await getCurrentUser();
-  const lang = localStorage.getItem('ideadrop_lang') || 'en';
-  const theme = localStorage.getItem('ideadrop_theme') || 'light';
-  const themeIcon = theme === 'dark' ? '☀️' : '🌙';
-
-  const langButtons = `
-    <button class="btn-ghost ${lang === 'en' ? 'lang-active' : ''}" onclick="setLang('en')">EN</button>
-    <button class="btn-ghost ${lang === 'fr' ? 'lang-active' : ''}" onclick="setLang('fr')">FR</button>
-    <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()">${themeIcon}</button>
-  `;
-
   if (user) {
-    navActions.innerHTML = langButtons + `
+    authSlot.innerHTML = `
       <a href="history.html" class="btn-ghost" data-i18n="history">📋 History</a>
       <button class="btn-ghost" onclick="logout()" data-i18n="logout">Logout</button>
     `;
   } else {
-    navActions.innerHTML = langButtons + `
+    authSlot.innerHTML = `
       <a href="auth.html" class="btn-ghost" data-i18n="login">Login</a>
       <a href="auth.html?mode=signup" class="btn-primary" data-i18n="getStarted">Get started free</a>
     `;
   }
-
   applyTranslations();
 }
 

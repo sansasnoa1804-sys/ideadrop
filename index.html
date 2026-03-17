@@ -19,8 +19,16 @@
       <a href="#features" data-i18n="features">Features</a>
       <a href="#pricing" data-i18n="pricing">Pricing</a>
     </div>
-    <div class="nav-actions" id="navActions">
-      <!-- filled by JS -->
+    <div class="nav-actions">
+      <!-- Static buttons always visible -->
+      <button class="btn-ghost" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="btn-ghost" id="btnFR" onclick="setLang('fr')">FR</button>
+      <button class="btn-ghost" id="themeToggle" onclick="toggleTheme()">🌙</button>
+      <!-- Auth slot: swapped by JS -->
+      <span id="authSlot">
+        <a href="auth.html" class="btn-ghost" data-i18n="login">Login</a>
+        <a href="auth.html?mode=signup" class="btn-primary" data-i18n="getStarted">Get started free</a>
+      </span>
     </div>
   </nav>
 
@@ -49,7 +57,6 @@
     </div>
     <div class="stars">★★★★★</div>
     <p class="testimonial" data-i18n="testimonial">"I validated my SaaS idea in 2 minutes" — Marc R.</p>
-
     <div class="idea-box">
       <textarea id="ideaInput" data-i18n="placeholder" maxlength="1000"></textarea>
       <div class="char-count"><span id="charCount">0</span>/1000</div>
@@ -57,7 +64,7 @@
       <div class="examples">
         <span data-i18n="tryExample">💡 Try an example:</span>
         <button class="chip" onclick="fillExample('A subscription box for eco-friendly household products delivered monthly to environmentally conscious consumers')" data-i18n="example1">Eco-friendly subscription box</button>
-        <button class="chip" onclick="fillExample('An AI tutor app that creates personalized study plans for high school students based on their learning style and weak subjects')" data-i18n="example2">AI tutor app</button>
+        <button class="chip" onclick="fillExample('An AI tutor app that creates personalized study plans for high school students')" data-i18n="example2">AI tutor app</button>
         <button class="chip" onclick="fillExample('A platform connecting freelance chefs with people who want home-cooked meals delivered in their neighborhood')" data-i18n="example3">Freelance chef platform</button>
       </div>
       <p class="limit-note" id="limitNote"></p>
@@ -69,24 +76,9 @@
     <h2 class="section-title" data-i18n="howTitle">Three steps to clarity</h2>
     <p class="section-sub" data-i18n="howSub">From raw idea to actionable strategy — in under 60 seconds.</p>
     <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-icon">✏️</div>
-        <h3 data-i18n="step1Title">Describe your idea</h3>
-        <p data-i18n="step1Text">Write a few sentences about your business concept.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-icon">🤖</div>
-        <h3 data-i18n="step2Title">AI analyzes it</h3>
-        <p data-i18n="step2Text">Our AI scans market data and generates a full strategic brief in seconds.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-icon">🚀</div>
-        <h3 data-i18n="step3Title">Launch with confidence</h3>
-        <p data-i18n="step3Text">Get scores, personas, revenue models, risks and 5 concrete first steps.</p>
-      </div>
+      <div class="step-card"><div class="step-num">1</div><div class="step-icon">✏️</div><h3 data-i18n="step1Title">Describe your idea</h3><p data-i18n="step1Text">Write a few sentences about your business concept.</p></div>
+      <div class="step-card"><div class="step-num">2</div><div class="step-icon">🤖</div><h3 data-i18n="step2Title">AI analyzes it</h3><p data-i18n="step2Text">Our AI scans market data and generates a full strategic brief in seconds.</p></div>
+      <div class="step-card"><div class="step-num">3</div><div class="step-icon">🚀</div><h3 data-i18n="step3Title">Launch with confidence</h3><p data-i18n="step3Text">Get scores, personas, revenue models, risks and 5 concrete first steps.</p></div>
     </div>
   </section>
 
@@ -96,15 +88,8 @@
     <p class="section-sub" data-i18n="sampleSub">A real example of a generated strategic brief.</p>
     <div class="sample-card">
       <div class="sample-header">
-        <div class="sample-score">
-          <div class="score-circle">78<span>/100</span></div>
-          <div class="score-badge promising">Promising ✓</div>
-        </div>
-        <div class="sample-info">
-          <div class="sample-label">STRATEGIC BRIEF</div>
-          <h3>Eco-friendly subscription box</h3>
-          <p>A monthly subscription service delivering curated eco-friendly household products.</p>
-        </div>
+        <div class="sample-score"><div class="score-circle">78<span>/100</span></div><div class="score-badge promising">Promising ✓</div></div>
+        <div class="sample-info"><div class="sample-label">STRATEGIC BRIEF</div><h3>Eco-friendly subscription box</h3><p>A monthly subscription service delivering curated eco-friendly household products.</p></div>
       </div>
       <div class="sample-bars">
         <div class="bar-row"><span>Market Potential</span><div class="bar"><div class="bar-fill" style="width:85%;background:#6C63FF"></div></div><span>85/100</span></div>
@@ -144,12 +129,8 @@
         <div class="pricing-name" data-i18n="free">Free</div>
         <div class="pricing-price">$0<span data-i18n="perMonth">/mo</span></div>
         <ul class="pricing-features">
-          <li>✓ 2 analyses / month</li>
-          <li>✓ Full strategic brief</li>
-          <li>✓ Viability sub-scores</li>
-          <li>✓ Last 3 analyses history</li>
-          <li class="disabled">✗ PDF export</li>
-          <li class="disabled">✗ Side-by-side comparison</li>
+          <li>✓ 2 analyses / month</li><li>✓ Full strategic brief</li><li>✓ Viability sub-scores</li><li>✓ Last 3 analyses history</li>
+          <li class="disabled">✗ PDF export</li><li class="disabled">✗ Side-by-side comparison</li>
         </ul>
         <a href="auth.html?mode=signup" class="btn-outline" data-i18n="getStartedFree">Get started free</a>
       </div>
@@ -158,12 +139,7 @@
         <div class="pricing-name" data-i18n="premium">Premium</div>
         <div class="pricing-price">$9<span data-i18n="perMonth">/mo</span></div>
         <ul class="pricing-features">
-          <li>✓ Unlimited analyses</li>
-          <li>✓ Full strategic brief</li>
-          <li>✓ Viability sub-scores</li>
-          <li>✓ Full history</li>
-          <li>✓ PDF export</li>
-          <li>✓ Side-by-side comparison</li>
+          <li>✓ Unlimited analyses</li><li>✓ Full strategic brief</li><li>✓ Viability sub-scores</li><li>✓ Full history</li><li>✓ PDF export</li><li>✓ Side-by-side comparison</li>
         </ul>
         <a href="auth.html?mode=signup" class="btn-primary" data-i18n="upgradePremium">Upgrade to Premium</a>
       </div>
@@ -174,11 +150,11 @@
     <div class="section-label" data-i18n="faqLabel">FAQ</div>
     <h2 class="section-title" data-i18n="faqTitle">Common questions</h2>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq1q">How accurate is the AI analysis?</span> <span>▾</span></button><div class="faq-a" data-i18n="faq1a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq2q">What's the difference between Free and Premium?</span> <span>▾</span></button><div class="faq-a" data-i18n="faq2a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq3q">Can I analyze the same idea multiple times?</span> <span>▾</span></button><div class="faq-a" data-i18n="faq3a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq4q">Is my idea kept private?</span> <span>▾</span></button><div class="faq-a" data-i18n="faq4a"></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq5q">Can I use IdeaDrop for existing businesses?</span> <span>▾</span></button><div class="faq-a" data-i18n="faq5a"></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq1q">How accurate is the AI analysis?</span><span>▾</span></button><div class="faq-a" data-i18n="faq1a"></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq2q">Free vs Premium?</span><span>▾</span></button><div class="faq-a" data-i18n="faq2a"></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq3q">Can I analyze the same idea multiple times?</span><span>▾</span></button><div class="faq-a" data-i18n="faq3a"></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq4q">Is my idea kept private?</span><span>▾</span></button><div class="faq-a" data-i18n="faq4a"></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq5q">Can I use IdeaDrop for existing businesses?</span><span>▾</span></button><div class="faq-a" data-i18n="faq5a"></div></div>
     </div>
   </section>
 
@@ -199,12 +175,7 @@
       <div class="modal-icon">👑</div>
       <h2 data-i18n="modalTitle">You've used all your free analyses</h2>
       <p data-i18n="modalSub">Upgrade to Premium to get unlimited analyses.</p>
-      <ul class="modal-features">
-        <li>✓ Unlimited analyses</li>
-        <li>✓ PDF export</li>
-        <li>✓ Side-by-side comparison</li>
-        <li>✓ Full history</li>
-      </ul>
+      <ul class="modal-features"><li>✓ Unlimited analyses</li><li>✓ PDF export</li><li>✓ Side-by-side comparison</li><li>✓ Full history</li></ul>
       <a href="auth.html?mode=signup" class="btn-primary btn-large" data-i18n="upgradeBtn">Upgrade to Premium — $9/mo</a>
       <button class="btn-ghost" onclick="closeModal()" data-i18n="maybeLater">Maybe later</button>
     </div>
