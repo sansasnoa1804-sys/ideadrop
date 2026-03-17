@@ -609,3 +609,5 @@ a { text-decoration: none; color: inherit; }
   color: white !important;
   border-color: var(--primary) !important;
 }
+
+.lang-active { color: var(--primary) !important; font-weight: 700; }
